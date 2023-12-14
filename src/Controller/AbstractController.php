@@ -9,7 +9,7 @@ use Twig\Loader\FilesystemLoader;
 /**
  * Initialized some Controller common features (Twig...)
  */
-class abstract AbstractController
+abstract class AbstractController
 {
     protected Environment $twig;
 

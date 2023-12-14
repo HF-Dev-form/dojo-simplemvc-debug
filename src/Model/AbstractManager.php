@@ -12,9 +12,9 @@ abstract class AbstractManager
 {
     protected PDO $pdo;
 
-    public const TABLE = '';
+    public const TABLE = 'item';
 
-    public function ___construct()
+    public function __construct()
     {
         $connection = new Connection();
         $this->pdo = $connection->getConnection();
@@ -38,7 +38,6 @@ abstract class AbstractManager
      */
     public function selectOneById(int $id): array|false
     {
-        // prepared request
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\\Controller;
+namespace App\Controller;
 
 use App\Model\ItemManager;
 
@@ -9,12 +9,11 @@ class ItemController extends AbstractController
     /**
      * List items
      */
-    public function index(): array
+    public function index(): string
     {
         $itemManager = new ItemManager();
-        $items = $itemManager->selectA11('title');
-
-        $this->twig->render('Item/index.twig', ['$items' => $items]);
+        $items = $itemManager->selectAll('id');
+        return $this->twig->render('Item/index.html.twig', ['items' => $items]);
     }
 
     /**

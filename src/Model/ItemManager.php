@@ -4,9 +4,9 @@ namespace App\Model;
 
 use PDO;
 
-class ItemManager extend AbstractManager
+class ItemManager extends AbstractManager
 {
-    public const TABLE = 'item'
+    public const TABLE = 'item';
 
     /**
      * Insert new item in database
@@ -30,5 +30,18 @@ class ItemManager extend AbstractManager
         $statement->bindValue('title', $item['title'], PDO::PARAM_STR);
 
         return $statement->execute();
+    }
+
+    /**
+    * Get all row from database.
+    */
+    public function selectAll(string $orderBy = '', string $direction = 'ASC'): array
+    {
+        $query = 'SELECT * FROM ' . static::TABLE;
+        if ($orderBy) {
+            $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
+        }
+
+        return $this->pdo->query($query)->fetchAll();
     }
 }
